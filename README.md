@@ -8,3 +8,5 @@
   - create file .env: (format .env.template)
   - Start server: node app.js or yarn start
 ```
+## 3. Demo
+![demo](./image/demo.png)
