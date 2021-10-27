@@ -1,5 +1,8 @@
 # binance-trade-sumary
 
+To analyse trades done by user on Binance cryptocurrency trading platform and generate summary of the trade for tax and reporting.
+
+
 ## 1. Create Binance API 
 
 ## 2. Run local
