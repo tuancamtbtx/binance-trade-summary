@@ -22,7 +22,7 @@ const sumary = async (code) => {
 		status: true,
 		averagePrice: totalMoney / qtys,
 		curentPrice,
-		totalMoney,
+		totalMoney: parseFloat(qtys) * parseFloat(curentPrice),
 		qtys,
 		curentMoney,
 	})

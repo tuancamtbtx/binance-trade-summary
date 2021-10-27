@@ -51,7 +51,7 @@ route.get('/sumary/:code', async (req, res) => {
 		status: true,
 		average_price: totalMoney / qtys,
 		curentPrice,
-		totalMoney,
+		totalMoney: parseFloat(qtys) * parseFloat(curentPrice),
 		qtys,
 		curentMoney,
 	})
