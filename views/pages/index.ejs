@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<%- include('../partials/head'); %>
+		<style>
+			body {
+				background-color: rgb(11, 14, 17);
+			}
+
+			input[type=text] {
+				width: 100%;
+				padding: 12px 12px;
+				margin: 8px 0px;
+				box-sizing: border-box;
+			}
+
+			;
+		</style>
+</head>
+
+<body class="container">
+	<header>
+		<%- include('../partials/header'); %>
+	</header>
+	<main>
+		<div class="jumbotron" style="margin-top: 4px;background-color:rgb(24, 26, 32); color: white">
+			<form action="/sumary/" method="post">
+				<label for="code">Crypto Coin</label>
+				<input type="text" id="code" name="code" value="<%= data.code %>">
+				<label for="api_key">Binance API KEY</label>
+				<input type="text" id="api_key" name="api_key">
+				<label for="api_secret">Binance API SECRET</label>
+				<input type="text" id="api_secret" name="api_secret">
+				<input style='background-color:rgb(252, 213, 53);color:rgb(33, 40, 51);border-radius: 6px;border: none;font-weight:500;padding:6px 12px;' type="submit" value="Kiểm Tra">
+
+			</form>
+		</div>
+		<% if (data.result !=null) { %>
+			<span style="color:white;font-size: 12px;">
+				Đơn Vị Tiền Tệ: USD
+			</span>
+			<div style="border-radius: 4px ;background-color: rgb(24, 26, 32); color: #ffffff; padding: 8px; font-size: 16px; font-weight: bold">
+				<% if (data.result !=null) { %>
+					<span>
+						Trung Bình Giá Mua: <%= data.result.averagePrice %>
+					</span>
+					<br />
+					<span>
+						Trung Bình Giá Bán: <%= data.result.status %>
+					</span>
+					<br />
+					<span>
+						Giá Hiện Tại: <%= data.result.curentPrice %>
+					</span>
+					<br />
+					<span>
+						Số Tiền: <%= data.result.totalMoney %>
+					</span>
+					<br />
+					<span>
+						Số Lượng Coin: <%= data.result.qtys %>
+					</span>
+					<br />
+					<span>
+						Tổng Lời/Lỗ: <%= data.result.status %>
+					</span>
+					<br />
+					<span>
+						% Lời/Lỗ Trung Bình: <%= data.result.status %>
+					</span>
+					<% } %>
+			</div>
+			<% } %>
+	</main>
+	<footer>
+		<%- include('../partials/footer'); %>
+	</footer>
+
+</body>
+
+</html>
