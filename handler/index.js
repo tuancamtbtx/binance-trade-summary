@@ -55,8 +55,7 @@ const sumary = async (code, apiKey, apiSecret) => {
 	let curentPrice = parseFloat(ticker[code])
 	let calSummaryProfit = summaryProfit(sell, buy, curentPrice)
 	let totalMoney = buy.qtys - sell.qtys < 0.01 ? 0 : (buy.qtys - sell.qtys) * curentPrice
-	let qtys = buy.qtys - sell.qtys < 0.01 && curentPrice < 100 ? 0 : (buy.qtys - sell.qtys) 
-
+	let qtys = buy.qtys - sell.qtys < 0.01 && curentPrice < 100 ? 0 : (buy.qtys - sell.qtys)
 	return ({
 		status: true,
 		averageSell: sell.averageSell,
