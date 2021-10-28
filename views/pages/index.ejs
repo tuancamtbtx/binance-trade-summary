@@ -14,7 +14,6 @@
 				margin: 8px 0px;
 				box-sizing: border-box;
 			}
-
 			;
 		</style>
 </head>
@@ -29,10 +28,12 @@
 				<label for="code">Crypto Coin</label>
 				<input type="text" id="code" name="code" value="<%= data.code %>">
 				<label for="api_key">Binance API KEY</label>
-				<input type="text" id="api_key" name="api_key">
+				<input type="text" id="api_key" name="api_key" value="<%= data.api_key %>">
 				<label for="api_secret">Binance API SECRET</label>
-				<input type="text" id="api_secret" name="api_secret">
-				<input style='background-color:rgb(252, 213, 53);color:rgb(33, 40, 51);border-radius: 6px;border: none;font-weight:500;padding:6px 12px;' type="submit" value="Kiểm Tra">
+				<input type="text" id="api_secret" name="api_secret" value="<%= data.api_secret %>">
+				<input
+					style='background-color:rgb(252, 213, 53);color:rgb(33, 40, 51);border-radius: 6px;border: none;font-weight:500;padding:6px 12px;'
+					type="submit" value="Kiểm Tra">
 
 			</form>
 		</div>
@@ -40,14 +41,19 @@
 			<span style="color:white;font-size: 12px;">
 				Đơn Vị Tiền Tệ: USD
 			</span>
-			<div style="border-radius: 4px ;background-color: rgb(24, 26, 32); color: #ffffff; padding: 8px; font-size: 16px; font-weight: bold">
+			<div
+				style="border-radius: 4px ;background-color: rgb(24, 26, 32); color: #ffffff; padding: 8px; font-size: 16px; font-weight: 500">
 				<% if (data.result !=null) { %>
 					<span>
-						Trung Bình Giá Mua: <%= data.result.averagePrice %>
+					 <%= data.result.code %>
 					</span>
 					<br />
 					<span>
-						Trung Bình Giá Bán: <%= data.result.status %>
+						Trung Bình Giá Mua: <%= data.result.averageBuy %>
+					</span>
+					<br />
+					<span>
+						Trung Bình Giá Bán: <%= data.result.averageSell %>
 					</span>
 					<br />
 					<span>
@@ -55,7 +61,7 @@
 					</span>
 					<br />
 					<span>
-						Số Tiền: <%= data.result.totalMoney %>
+						Số Tiền Hiện Tại: <%= data.result.totalMoney %>
 					</span>
 					<br />
 					<span>
@@ -63,15 +69,52 @@
 					</span>
 					<br />
 					<span>
-						Tổng Lời/Lỗ: <%= data.result.status %>
+						Tổng Lời/Lỗ: <%= data.result.profit %>
 					</span>
 					<br />
 					<span>
-						% Lời/Lỗ Trung Bình: <%= data.result.status %>
+						Lời/Lỗ Trung Bình: <%= data.result.percentProfit %> %
 					</span>
 					<% } %>
 			</div>
-			<% } %>
+			<% if (data.result.orders !=null) { %>
+				<div
+					style="margin-top: 8px;border-radius: 4px ;background-color: rgb(24, 26, 32); color: #ffffff; padding: 8px; font-size: 14px; font-weight: 500">
+					<span style="color:rgb(252, 213, 53)">List order</span>
+					<% data.result.orders.reverse().forEach(function(item){ %>
+						<div
+							style="margin-top: 8px;border-radius: 4px ;background-color: #ecf0f1; color:rgb(24, 26, 32); padding: 8px;">
+							<span>
+								<%= item.symbol %>
+									<br />
+									<% if (item.side !=null && item.side==="BUY" ) { %><span style="color:#2ecc71; font-weight:bold">
+											<%=item.side%>
+										</span>
+										<% } %>
+											<% if (item.side !=null && item.side==="SELL" ) { %><span
+													style="color:#e74c3c;font-weight:bold">
+													<%=item.side%>
+												</span>
+												<% } %>
+													<br />
+													<span>Price: <%=item.price%></span>
+													<br />
+													<span>Status: <%=item.status%></span>
+													<br /> 
+													<span>Price: <%=item.price%></span>
+													<br /> 
+													<span>Orig Qty: <%=item.origQty%></span>
+													<br /> 
+													<span>Executed Qty: <%=item.executedQty%></span>
+													<br />
+													<span>Time: <%=new Date(item.time).toUTCString()%></span>
+													<br />
+						</div>
+						<br />
+						<% }); %>
+				</div>
+				<% } %>
+					<% } %>
 	</main>
 	<footer>
 		<%- include('../partials/footer'); %>

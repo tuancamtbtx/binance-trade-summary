@@ -19,12 +19,14 @@ app.get('/summary', async (req, res) => {
 	});
 })
 app.post('/summary', async (req, res) => {
-	let { code } = req.body
-	let result = await sumary(code)
+	let { code ,api_key, api_secret} = req.body
+	let result = await sumary(code, api_key, api_secret)
 	return res.render('pages/index', {
 		data: {
 			code: code,
-			result: result
+			api_key, 
+			api_secret,
+			result: result,
 		}
 	});
 })
