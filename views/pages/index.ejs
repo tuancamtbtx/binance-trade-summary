@@ -8,7 +8,7 @@
 				background-color: rgb(11, 14, 17);
 			}
 
-			input[type=text] {
+			input {
 				width: 100%;
 				padding: 12px 12px;
 				margin: 8px 0px;
@@ -24,15 +24,17 @@
 	</header>
 	<main>
 		<div class="jumbotron" style="margin-top: 4px;background-color:rgb(24, 26, 32); color: white">
-			<form action="/summary/" method="post">
+			<form action="/" method="post">
 				<label for="code">Crypto Coin</label>
-				<input type="text" id="code" name="code" value="<%= data.code %>">
+				<input placeholder="Coin" type="text" id="code" name="code" value="<%= data.code %>">
 				<label for="api_key">Binance API KEY</label>
-				<input type="text" id="api_key" name="api_key" value="<%= data.api_key %>">
+				<input placeholder="Binance API KEY" type="password" id="api_key" name="api_key"
+					value="<%= data.api_key %>">
 				<label for="api_secret">Binance API SECRET</label>
-				<input type="text" id="api_secret" name="api_secret" value="<%= data.api_secret %>">
+				<input placeholder="Binance API SECRET" type="password" id="api_secret" name="api_secret"
+					value="<%= data.api_secret %>">
 				<input
-					style='background-color:rgb(252, 213, 53);color:rgb(33, 40, 51);border-radius: 6px;border: none;font-weight:500;padding:6px 12px;'
+					style='background-color:rgb(252, 213, 53);color:rgb(33, 40, 51);border-radius: 6px;border: none;font-weight:500; padding:6px 12px; width: 120px; float: right;'
 					type="submit" value="Kiểm Tra">
 
 			</form>
@@ -45,7 +47,7 @@
 				style="border-radius: 4px ;background-color: rgb(24, 26, 32); color: #ffffff; padding: 8px; font-size: 16px; font-weight: 500">
 				<% if (data.result !=null) { %>
 					<span>
-					 <%= data.result.code %>
+						<%= data.result.code %>
 					</span>
 					<br />
 					<span>
@@ -87,7 +89,8 @@
 							<span>
 								<%= item.symbol %>
 									<br />
-									<% if (item.side !=null && item.side==="BUY" ) { %><span style="color:#2ecc71; font-weight:bold">
+									<% if (item.side !=null && item.side==="BUY" ) { %><span
+											style="color:#2ecc71; font-weight:bold">
 											<%=item.side%>
 										</span>
 										<% } %>
@@ -100,18 +103,18 @@
 													<span>Price: <%=item.price%></span>
 													<br />
 													<span>Status: <%=item.status%></span>
-													<br /> 
+													<br />
 													<span>Price: <%=item.price%></span>
-													<br /> 
+													<br />
 													<span>Orig Qty: <%=item.origQty%></span>
-													<br /> 
+													<br />
 													<span>Executed Qty: <%=item.executedQty%></span>
 													<br />
 													<span>Sum (USD): <%=item.cummulativeQuoteQty%></span>
 													<br />
 													<span>Time: <%=new Date(item.time).toUTCString()%></span>
 													<br />
-													
+
 						</div>
 						<br />
 						<% }); %>

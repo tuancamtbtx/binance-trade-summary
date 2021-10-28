@@ -44,29 +44,37 @@ const sumary = async (code, apiKey, apiSecret) => {
 	if (code == '' || apiKey == '' || apiSecret == '') {
 		return null;
 	}
-	const binance = new Binance().options({
-		APIKEY: apiKey,
-		APISECRET: apiSecret
-	});
-	let data = await binance.allOrders(code)
-	let sell = summarySell(data)
-	let buy = summaryBuy(data)
-	let ticker = await binance.prices(code)
-	let curentPrice = parseFloat(ticker[code])
-	let calSummaryProfit = summaryProfit(sell, buy, curentPrice)
-	let totalMoney = buy.qtys - sell.qtys < 0.01 ? 0 : (buy.qtys - sell.qtys) * curentPrice
-	let qtys = buy.qtys - sell.qtys < 0.01 && curentPrice < 100 ? 0 : (buy.qtys - sell.qtys)
-	return ({
-		status: true,
-		averageSell: sell.averageSell,
-		code: code,
-		averageBuy: buy.averageBuy,
-		curentPrice,
-		totalMoney,
-		qtys,
-		profit: calSummaryProfit.profit,
-		percentProfit: calSummaryProfit.percentProfit,
-		orders: data
-	})
+	try {
+		const binance = new Binance().options({
+			APIKEY: apiKey,
+			APISECRET: apiSecret
+		});
+		let data = await binance.allOrders(code)
+		if (data.length <= 0) {
+			return null
+		}
+		let sell = summarySell(data)
+		let buy = summaryBuy(data)
+		let ticker = await binance.prices(code)
+		let curentPrice = parseFloat(ticker[code])
+		let calSummaryProfit = summaryProfit(sell, buy, curentPrice)
+		let totalMoney = buy.qtys - sell.qtys < 0.01 ? 0 : (buy.qtys - sell.qtys) * curentPrice
+		let qtys = buy.qtys - sell.qtys < 0.01 && curentPrice < 100 ? 0 : (buy.qtys - sell.qtys)
+		return ({
+			status: true,
+			averageSell: sell.averageSell,
+			code: code,
+			averageBuy: buy.averageBuy,
+			curentPrice,
+			totalMoney,
+			qtys,
+			profit: calSummaryProfit.profit,
+			percentProfit: calSummaryProfit.percentProfit,
+			orders: data
+		})
+	} catch (e) {
+		return null
+	}
+
 }
 module.exports = sumary

@@ -10,7 +10,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get('/summary', async (req, res) => {
+app.get('/', async (req, res) => {
+
 	return res.render('pages/index', {
 		data: {
 			code: 'BNBUSDT',
@@ -18,13 +19,13 @@ app.get('/summary', async (req, res) => {
 		}
 	});
 })
-app.post('/summary', async (req, res) => {
-	let { code ,api_key, api_secret} = req.body
+app.post('/', async (req, res) => {
+	let { code, api_key, api_secret } = req.body
 	let result = await sumary(code, api_key, api_secret)
 	return res.render('pages/index', {
 		data: {
 			code: code,
-			api_key, 
+			api_key,
 			api_secret,
 			result: result,
 		}
